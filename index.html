@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Live Captions Demo (Web Speech API)</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Live Captions</h1>
+      <div id="supportNotice" class="support"></div>
+    </header>
+
+    <section class="controls">
+      <label for="language">Language</label>
+      <select id="language">
+        <option value="en-US" selected>English (US)</option>
+        <option value="en-GB">English (UK)</option>
+        <option value="en-AU">English (AU)</option>
+        <option value="en-CA">English (CA)</option>
+        <option value="en-IN">English (IN)</option>
+        <option value="en-NZ">English (NZ)</option>
+        <option value="en-ZA">English (ZA)</option>
+
+        <option value="es-ES">Spanish (ES)</option>
+        <option value="es-MX">Spanish (MX)</option>
+        <option value="es-US">Spanish (US)</option>
+        <option value="es-AR">Spanish (AR)</option>
+        <option value="es-CO">Spanish (CO)</option>
+        <option value="es-CL">Spanish (CL)</option>
+        <option value="es-PE">Spanish (PE)</option>
+        <option value="es-VE">Spanish (VE)</option>
+        <option value="es-UY">Spanish (UY)</option>
+        <option value="es-BO">Spanish (BO)</option>
+        <option value="es-EC">Spanish (EC)</option>
+        <option value="es-GT">Spanish (GT)</option>
+        <option value="es-HN">Spanish (HN)</option>
+        <option value="es-NI">Spanish (NI)</option>
+        <option value="es-PA">Spanish (PA)</option>
+        <option value="es-PY">Spanish (PY)</option>
+        <option value="es-PR">Spanish (PR)</option>
+        <option value="es-DO">Spanish (DO)</option>
+        <option value="es-SV">Spanish (SV)</option>
+
+        <option value="fr-FR">French (FR)</option>
+        <option value="fr-CA">French (CA)</option>
+
+        <option value="de-DE">German</option>
+        <option value="it-IT">Italian (IT)</option>
+        <option value="it-CH">Italian (CH)</option>
+        <option value="pt-BR">Portuguese (BR)</option>
+        <option value="pt-PT">Portuguese (PT)</option>
+        <option value="ru-RU">Russian</option>
+        <option value="ja-JP">Japanese</option>
+        <option value="ko-KR">Korean</option>
+
+        <option value="zh-CN">Chinese (Simplified, CN)</option>
+        <option value="zh-TW">Chinese (Traditional, TW)</option>
+        <option value="zh-HK">Chinese (HK)</option>
+
+        <option value="ar-SA">Arabic (SA)</option>
+        <option value="ar-AE">Arabic (AE)</option>
+        <option value="ar-EG">Arabic (EG)</option>
+        <option value="ar-DZ">Arabic (DZ)</option>
+        <option value="ar-MA">Arabic (MA)</option>
+        <option value="ar-JO">Arabic (JO)</option>
+        <option value="ar-KW">Arabic (KW)</option>
+        <option value="ar-LB">Arabic (LB)</option>
+        <option value="ar-QA">Arabic (QA)</option>
+        <option value="ar-TN">Arabic (TN)</option>
+        <option value="ar-SY">Arabic (SY)</option>
+
+        <option value="bn-BD">Bengali (BD)</option>
+        <option value="bn-IN">Bengali (IN)</option>
+        <option value="hi-IN">Hindi</option>
+        <option value="mr-IN">Marathi</option>
+        <option value="gu-IN">Gujarati</option>
+        <option value="ta-IN">Tamil</option>
+        <option value="te-IN">Telugu</option>
+        <option value="kn-IN">Kannada</option>
+        <option value="ml-IN">Malayalam</option>
+        <option value="ur-PK">Urdu (PK)</option>
+        <option value="ur-IN">Urdu (IN)</option>
+        <option value="ne-NP">Nepali</option>
+        <option value="si-LK">Sinhala</option>
+
+        <option value="tr-TR">Turkish</option>
+        <option value="fa-IR">Persian</option>
+        <option value="he-IL">Hebrew</option>
+        <option value="el-GR">Greek</option>
+
+        <option value="nl-NL">Dutch</option>
+        <option value="nb-NO">Norwegian (Bokmål)</option>
+        <option value="da-DK">Danish</option>
+        <option value="sv-SE">Swedish</option>
+        <option value="fi-FI">Finnish</option>
+        <option value="pl-PL">Polish</option>
+        <option value="cs-CZ">Czech</option>
+        <option value="sk-SK">Slovak</option>
+        <option value="sl-SI">Slovenian</option>
+        <option value="ro-RO">Romanian</option>
+        <option value="hu-HU">Hungarian</option>
+        <option value="bg-BG">Bulgarian</option>
+        <option value="uk-UA">Ukrainian</option>
+        <option value="sr-RS">Serbian</option>
+        <option value="hr-HR">Croatian</option>
+
+        <option value="ca-ES">Catalan</option>
+        <option value="eu-ES">Basque</option>
+        <option value="gl-ES">Galician</option>
+
+        <option value="id-ID">Indonesian</option>
+        <option value="ms-MY">Malay</option>
+        <option value="fil-PH">Filipino</option>
+        <option value="vi-VN">Vietnamese</option>
+        <option value="th-TH">Thai</option>
+        <option value="hy-AM">Armenian</option>
+        <option value="ka-GE">Georgian</option>
+        <option value="lt-LT">Lithuanian</option>
+        <option value="lv-LV">Latvian</option>
+        <option value="et-EE">Estonian</option>
+        <option value="is-IS">Icelandic</option>
+        <option value="mn-MN">Mongolian</option>
+        <option value="km-KH">Khmer</option>
+        <option value="zu-ZA">Zulu</option>
+        <option value="af-ZA">Afrikaans</option>
+        <option value="az-AZ">Azerbaijani</option>
+      </select>
+
+      <button id="startBtn" class="primary">Start captions</button>
+      <button id="stopBtn" disabled>Stop</button>
+
+      <label class="switch">
+        <input type="checkbox" id="autoRestart" checked />
+        <span class="slider"></span>
+      </label>
+      <span class="switch-label">Auto‑restart</span>
+
+      <button id="downloadBtn" class="ghost" disabled>Download transcript</button>
+    </section>
+
+    <section class="stage">
+      <div class="caption-line final" id="finalLine"></div>
+      <div class="caption-line interim" id="interimLine"></div>
+    </section>
+
+    <section class="status-bar">
+      <div id="status">Idle</div>
+      <div id="error"></div>
+    </section>
+
+    <section class="transcript">
+      <h2>Transcript</h2>
+      <ol id="transcriptList"></ol>
+    </section>
+
+    <footer>
+      <small>
+        Best in Chromium browsers (Chrome, Edge). Uses Web Speech API
+        recognition service.
+      </small>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+  </html>
